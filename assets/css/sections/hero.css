@@ -1,0 +1,110 @@
+/* ============================================================
+   Hero — full-viewport opener, live online, wipe countdown, CTA
+   ============================================================ */
+
+/* ---------- Hero ---------- */
+.hero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
+  min-height: 100svh;
+  padding: 24px var(--pad) 32px;
+  overflow: hidden;
+  background: linear-gradient(180deg, #000 0%, var(--bg-deep) 100%);
+  color: var(--fg);
+}
+.hero > .nav,
+.hero > .hero__title,
+.hero > .hero__bottom { flex: none; }
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+
+.nav__links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+.nav__links a { white-space: nowrap; }
+
+.nav__actions {
+  display: none;
+  align-items: center;
+  gap: 8px;
+}
+
+.hero__title {
+  margin: 0;
+  font-family: 'Unbounded', sans-serif;
+  font-weight: 900;
+  text-transform: uppercase;
+  font-size: clamp(30px, 9.2vw, 168px);
+  line-height: .86;
+  letter-spacing: -.04em;
+}
+
+.line-mask {
+  display: block;
+  overflow: hidden;
+  padding-top: .14em;
+  margin-top: -.14em;
+}
+.line-mask > span { display: block; }
+
+.hero__bottom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 28px;
+}
+
+.hero__online {
+  display: flex;
+  align-items: flex-end;
+  gap: 20px;
+}
+.hero__online-num {
+  font-family: 'Unbounded', sans-serif;
+  font-weight: 700;
+  font-size: clamp(56px, 7vw, 112px);
+  line-height: .8;
+  letter-spacing: -.05em;
+  font-variant-numeric: tabular-nums;
+}
+.hero__online-label {
+  padding-bottom: 4px;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+.hero__wipe {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.hero__wipe-label { font-size: 15px; font-weight: 500; color: var(--muted); }
+.hero__wipe-num {
+  font-family: 'Unbounded', sans-serif;
+  font-weight: 700;
+  font-size: clamp(30px, 3.6vw, 56px);
+  line-height: .9;
+  letter-spacing: -.03em;
+  font-variant-numeric: tabular-nums;
+}
+
+.hero__cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}

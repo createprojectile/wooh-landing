@@ -1,0 +1,73 @@
+/* ============================================================
+   Features — sticky stacking cards
+   ============================================================ */
+
+.features { padding-bottom: clamp(40px, 6vh, 80px); }
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.feature-card {
+  position: sticky;
+  top: var(--top, 24px);
+  min-height: min(72vh, 620px);
+  padding: clamp(28px, 4vw, 56px);
+  border-radius: var(--radius);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr));
+  gap: 32px;
+  align-content: space-between;
+  transform-origin: center top;
+  will-change: transform, filter;
+}
+.feature-card--light { background: var(--fg); color: var(--bg); }
+.feature-card--deep { background: var(--bg-deep); color: var(--fg); }
+.feature-card--accent { background: var(--accent); color: var(--bg); }
+
+.feature-card__left {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 32px;
+}
+.feature-card__index {
+  font-family: 'Unbounded', sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+}
+.feature-card h3 {
+  font-family: 'Unbounded', sans-serif;
+  font-weight: 900;
+  text-transform: uppercase;
+  font-size: clamp(44px, 6.4vw, 108px);
+  line-height: .86;
+  letter-spacing: -.045em;
+}
+
+.feature-card__right {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 20px;
+  max-width: 460px;
+  justify-self: end;
+}
+.feature-card__right p {
+  font-size: clamp(17px, 1.5vw, 21px);
+  line-height: 1.5;
+  font-weight: 500;
+}
+.feature-card__note {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  height: 36px;
+  padding: 0 16px;
+  border-radius: 999px;
+  border: 1.5px solid currentColor;
+  font-size: 14px;
+  font-weight: 600;
+}

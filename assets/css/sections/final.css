@@ -1,0 +1,61 @@
+/* ============================================================
+   Final — copy command, socials, footer meta
+   ============================================================ */
+
+.final {
+  padding: var(--section-y) var(--pad) 32px;
+  background: linear-gradient(0deg, var(--bg-deep) 0%, #000 100%);
+  color: var(--fg);
+}
+.final__copy {
+  display: block;
+  width: 100%;
+  transition: opacity .2s;
+}
+.final__copy:hover { opacity: .85; }
+.final__label {
+  display: block;
+  margin-bottom: 18px;
+  font-size: 16px;
+  font-weight: 600;
+}
+.final__command {
+  display: block;
+  font-family: 'Unbounded', sans-serif;
+  font-weight: 900;
+  font-size: clamp(21px, 5.6vw, 100px);
+  line-height: .95;
+  letter-spacing: -.045em;
+  word-break: break-word;
+}
+
+.final__socials {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr));
+  gap: 20px;
+  margin-top: clamp(64px, 10vh, 120px);
+  padding-top: 24px;
+  border-top: 2px solid var(--fg);
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.final__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 40px;
+  font-size: 13px;
+  font-weight: 500;
+}
+.final__visitors { color: var(--muted); font-variant-numeric: tabular-nums; }
+.final__visitors b {
+  font-family: 'Unbounded', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: -.02em;
+  color: var(--accent);
+}
+.final__legal { display: flex; gap: 24px; }

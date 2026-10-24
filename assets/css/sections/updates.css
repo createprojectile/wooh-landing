@@ -1,0 +1,98 @@
+/* ============================================================
+   Updates — release rows, mini cards, banner
+   ============================================================ */
+
+.updates { padding-top: clamp(60px, 10vh, 120px); padding-bottom: 0; }
+
+.updates__list { display: flex; flex-direction: column; }
+
+.update-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr));
+  align-items: center;
+  gap: clamp(20px, 3vw, 48px);
+  padding: clamp(24px, 4vh, 40px) 0;
+  border-top: 1px solid var(--line-strong);
+}
+
+.update-row__media {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #000;
+}
+.update-row__media img { width: 100%; height: auto; }
+.update-row__media--portrait img {
+  width: auto;
+  max-height: 560px;
+  border-radius: 20px;
+}
+
+.update-row__text {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-width: 520px;
+}
+.update-row__num {
+  font-family: 'Unbounded', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--accent);
+}
+.update-row__text h3,
+.mini-card h3 {
+  font-family: 'Unbounded', sans-serif;
+  font-weight: 700;
+  font-size: clamp(24px, 2.4vw, 36px);
+  line-height: 1.1;
+  letter-spacing: -.03em;
+  text-wrap: balance;
+}
+.update-row__text p {
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+.updates__mini {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+  gap: 12px;
+  margin-top: 12px;
+}
+.mini-card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: clamp(24px, 3vw, 36px);
+  border-radius: 24px;
+  background: var(--card);
+  border: 1px solid var(--line);
+}
+.mini-card h3 { font-size: clamp(22px, 2vw, 30px); }
+.mini-card p { font-size: 17px; line-height: 1.55; color: var(--muted); }
+
+.updates__banner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 12px;
+  padding: clamp(24px, 3vw, 40px);
+  border-radius: 24px;
+  background: var(--accent);
+  color: var(--bg);
+}
+.updates__banner span:first-child {
+  font-family: 'Unbounded', sans-serif;
+  font-weight: 900;
+  text-transform: uppercase;
+  font-size: clamp(22px, 3vw, 44px);
+  line-height: 1;
+  letter-spacing: -.04em;
+}
+.updates__banner span:last-child { font-size: 17px; font-weight: 600; }

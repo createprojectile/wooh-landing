@@ -1,0 +1,148 @@
+/* ============================================================
+   Base — design tokens, reset, typography, shared layout helpers.
+   Load after fonts.css, before components/sections.
+   ============================================================ */
+
+/* ---------- Tokens ---------- */
+:root {
+  color-scheme: dark;
+  --bg: #05040c;
+  --bg-deep: #0a054a;
+  --accent: #6f66ff;
+  --accent-deep: #2b1fd6;
+  --fg: #eeecf5;
+  --muted: #a9a6bd;
+  --muted-2: #5f5c7a;
+  --on-photo: #dcd9e8;
+  --card: #0e0c1f;
+  --card-2: #110d2e;
+  --line: #1d1a38;
+  --line-strong: #2e2960;
+  --track: #16123a;
+  --step: #dedbeb;
+
+  --pad: clamp(16px, 3vw, 40px);
+  --section-y: clamp(80px, 12vh, 140px);
+  --radius: 32px;
+  --ease: cubic-bezier(.2, .7, .2, 1);
+  --spring: cubic-bezier(.34, 1.56, .64, 1);
+  --curtain: cubic-bezier(.76, 0, .24, 1);
+}
+
+/* ---------- Reset ---------- */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: 'Golos Text', system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: clip;
+}
+
+body.is-locked { overflow: hidden; }
+
+h1, h2, h3, p, figure, blockquote, dl, dd { margin: 0; }
+
+img { display: block; max-width: 100%; }
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: opacity .2s;
+}
+
+a:hover { opacity: .75; }
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  text-align: left;
+}
+
+ul { margin: 0; padding: 0; }
+
+::selection { background: var(--bg); color: var(--accent); }
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+section[id] { scroll-margin-top: 20px; }
+
+.accent { color: var(--accent); }
+.blue { color: var(--accent-deep); }
+
+.skip-link {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 10001;
+  padding: 12px 18px;
+  border-radius: 999px;
+  background: var(--fg);
+  color: var(--bg);
+  font-weight: 600;
+  transform: translateY(-160%);
+  transition: transform .2s;
+}
+.skip-link:focus { transform: none; }
+
+
+/* ---------- Shared layout ---------- */
+.section { padding: var(--section-y) var(--pad); }
+
+.section-title {
+  margin: 0 0 clamp(40px, 6vh, 72px);
+  font-family: 'Unbounded', sans-serif;
+  font-weight: 900;
+  text-transform: uppercase;
+  font-size: clamp(30px, 8.4vw, 96px);
+  line-height: .88;
+  letter-spacing: -.04em;
+}
+.section-head .section-title { margin: 0; }
+
+.section-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: clamp(32px, 5vh, 56px);
+}
+.section-head > p {
+  max-width: 400px;
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+
+/* ---------- Accessibility / native behaviour ---------- */
+[hidden] { display: none !important; }
+img, svg, video { max-width: 100%; }
+/* ---------- Fail-safe when ES modules are blocked (file:// preview) ---------- */
+.no-modules [data-reveal],
+.no-modules .line-mask > span {
+  opacity: 1 !important;
+  transform: none !important;
+}
+.no-modules .rules__tabs { display: none; }
+.no-modules #rulesPanels [role="tabpanel"][hidden] { display: block !important; }

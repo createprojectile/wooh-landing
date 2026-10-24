@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>WOOH Project — бесплатный Rust для слабых ПК</title>
+  <meta name="description" content="Бесплатный Rust для слабых ПК. Свой лаунчер, античит, честный донат. Вайп каждую пятницу в 16:00 МСК.">
+  <link rel="canonical" href="https://woohproject.ru/">
+  <meta name="theme-color" content="#05040c">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="WOOH Project">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:title" content="WOOH Project — бесплатный Rust для слабых ПК">
+  <meta property="og:description" content="Бесплатный Rust для слабых ПК. Свой лаунчер, античит, честный донат. Вайп каждую пятницу в 16:00 МСК.">
+  <meta property="og:url" content="https://woohproject.ru/">
+  <meta property="og:image" content="https://woohproject.ru/assets/img/world/main.png">
+  <meta property="og:image:alt" content="Карта основного сервера WOOHRUST">
+  <meta property="og:image:width" content="1920">
+  <meta property="og:image:height" content="1080">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="assets/img/logo.png">
+
+  <link rel="preconnect" href="https://api.gamemonitoring.ru" crossorigin>
+  <link rel="preload" href="assets/fonts/golos-text-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/unbounded-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+
+  <!-- Stylesheets are plain files (no build step). Order matters: base → components → sections → responsive. -->
+  <link rel="stylesheet" href="assets/css/fonts.css">
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/sections/hero.css">
+  <link rel="stylesheet" href="assets/css/sections/servers.css">
+  <link rel="stylesheet" href="assets/css/sections/online.css">
+  <link rel="stylesheet" href="assets/css/sections/features.css">
+  <link rel="stylesheet" href="assets/css/sections/updates.css">
+  <link rel="stylesheet" href="assets/css/sections/reviews.css">
+  <link rel="stylesheet" href="assets/css/sections/download.css">
+  <link rel="stylesheet" href="assets/css/sections/rules.css">
+  <link rel="stylesheet" href="assets/css/sections/final.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
+
+  <script>
+    // Enables JS-only styles immediately. The timer is a fail-safe for
+    // `file://` previews where ES modules are blocked by CORS.
+    (function () {
+      var root = document.documentElement;
+      root.classList.add('js');
+      window.setTimeout(function () {
+        if (window.__woohBooted) return;
+        root.classList.add('no-modules');
+        var curtain = document.getElementById('curtain');
+        if (curtain && !curtain.classList.contains('is-done')) {
+          curtain.classList.add('is-done', 'is-hidden');
+        }
+      }, 2500);
+    })();
+  </script>
+  <script type="module" src="assets/js/main.js"></script>
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "WOOH Project",
+      "alternateName": "WOOHRUST",
+      "url": "https://woohproject.ru/",
+      "inLanguage": "ru-RU",
+      "description": "Бесплатный Rust для слабых ПК. Свой лаунчер, античит, честный донат."
+    }
+  </script>
+</head>
+<body>
+  <div class="curtain" id="curtain" aria-hidden="true">
+    <div class="curtain__dark"></div>
+    <div class="curtain__accent"></div>
+  </div>
+
+  <a class="skip-link" href="#servers">Перейти к серверам</a>
+
+  <section class="hero" id="top">
+    <header class="nav">
+      <a class="brand" href="#top" aria-label="WOOH — на главную">
+        <img src="assets/img/logo.png" alt="" width="30" height="30">
+        <span>WOOH</span>
+      </a>
+
+      <nav class="nav__links" aria-label="Основная навигация">
+        <a href="#servers">Серверы</a>
+        <a href="#online">Онлайн</a>
+        <a href="#features">Фичи</a>
+        <a href="#download">Скачать</a>
+        <a href="#rules">Правила</a>
+        <a href="https://woohrust.gamestores.app" target="_blank" rel="noreferrer">Магазин ↗</a>
+      </nav>
+
+      <div class="nav__actions">
+        <a class="btn btn--light btn--sm" href="#download">Скачать</a>
+        <button class="btn btn--outline btn--sm" type="button" id="menuOpen" aria-expanded="false" aria-controls="mobileMenu">Меню</button>
+      </div>
+    </header>
+
+    <h1 class="hero__title">
+      <span class="line-mask"><span>Бесплатный</span></span>
+      <span class="line-mask"><span data-delay="80">Rust для</span></span>
+      <span class="line-mask"><span data-delay="160" class="accent">слабых ПК</span></span>
+    </h1>
+
+    <div class="hero__bottom" data-reveal data-delay="300">
+      <div class="hero__online">
+        <span class="hero__online-num" id="onlineTotal">—</span>
+        <span class="hero__online-label">игроков<br>онлайн сейчас</span>
+      </div>
+
+      <div class="hero__wipe">
+        <span class="hero__wipe-label">До вайпа · каждую пятницу в 16:00 МСК</span>
+        <span class="hero__wipe-num" id="wipeTimer">—</span>
+      </div>
+
+      <div class="hero__cta">
+        <a class="btn btn--light btn--lg btn--spring" href="#download">Скачать лаунчер</a>
+        <button class="btn btn--outline btn--lg" type="button" data-copy="client.connect 5.42.211.95:35000">
+          <span class="copy-label">Скопировать IP</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <section class="servers" id="servers" aria-labelledby="serversTitle">
+    <div class="servers__sticky">
+      <div class="servers__track" id="serversTrack">
+        <div class="servers__intro">
+          <h2 id="serversTitle">Два<br><span class="accent">сервера</span></h2>
+          <p>Основной для рейдов и вайпов, тренировочный — чтобы набить аим. <span class="servers__hint">Листай дальше.</span></p>
+          <span class="servers__arrow" aria-hidden="true">→</span>
+        </div>
+
+        <article class="server-card" aria-labelledby="serverMain">
+          <div class="server-card__inner">
+            <img src="assets/img/world/main.png" alt="Карта основного сервера Rust" width="1920" height="1080" loading="lazy" decoding="async">
+            <div class="server-card__shade"></div>
+
+            <div class="server-card__top">
+              <span class="badge badge--status" data-status="main">Проверка…</span>
+              <div class="server-card__numbers">
+                <span class="badge badge--light" data-players="main">— / —</span>
+                <span class="server-card__queue" data-queue="main" hidden></span>
+              </div>
+            </div>
+
+            <div class="server-card__bottom">
+              <div>
+                <p class="server-card__caption">Procedural Map · 3500 · X2 · MAX 4</p>
+                <h3 id="serverMain">MAIN</h3>
+              </div>
+              <div class="server-card__info">
+                <p>Основной сервер: рейды, вайпы, экономика. Лимит команды — 4 человека.</p>
+                <button class="server-card__connect" type="button" data-copy="client.connect 5.42.211.95:35000">
+                  <span class="server-card__ip"><span class="server-card__ip-prefix">client.connect </span>5.42.211.95:35000</span>
+                  <span class="copy-label">Копировать</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="server-card" aria-labelledby="serverCombat">
+          <div class="server-card__inner">
+            <img src="assets/img/world/combat.png" alt="Карта тренировочного сервера" width="1920" height="1080" loading="lazy" decoding="async">
+            <div class="server-card__shade"></div>
+
+            <div class="server-card__top">
+              <span class="badge badge--status" data-status="combat">Проверка…</span>
+              <div class="server-card__numbers">
+                <span class="badge badge--light" data-players="combat">— / —</span>
+                <span class="server-card__queue" data-queue="combat" hidden></span>
+              </div>
+            </div>
+
+            <div class="server-card__bottom">
+              <div>
+                <p class="server-card__caption">Custom Map · 1800 · Aim train</p>
+                <h3 id="serverCombat">COMBAT</h3>
+              </div>
+              <div class="server-card__info">
+                <p>Тренировочный сервер для отработки аима. Кастомная карта, отдельная от основного цикла вайпов.</p>
+                <button class="server-card__connect" type="button" data-copy="client.connect 5.42.211.95:35010">
+                  <span class="server-card__ip"><span class="server-card__ip-prefix">client.connect </span>5.42.211.95:35010</span>
+                  <span class="copy-label">Копировать</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="servers__progress" aria-hidden="true"><span id="serversBar"></span></div>
+    </div>
+  </section>
+
+  <section class="section online" id="online" aria-labelledby="onlineTitle">
+    <div class="panel online__panel">
+      <div class="online__head">
+        <h2 id="onlineTitle">Онлайн<br><span class="accent" id="chartRangeTitle">за сутки</span></h2>
+
+        <div class="online__metrics">
+          <div class="metric">
+            <span class="metric__label">Пик</span>
+            <span class="metric__value" id="chartPeak">—</span>
+            <span class="metric__note" id="chartPeakAt">—</span>
+          </div>
+          <div class="metric">
+            <span class="metric__label">Среднее</span>
+            <span class="metric__value" id="chartAvg">—</span>
+            <span class="metric__note">игроков</span>
+          </div>
+          <div class="metric metric--accent" aria-live="polite" aria-atomic="true">
+            <span class="metric__label" id="readLabel">Сейчас</span>
+            <span class="metric__value" id="readValue">—</span>
+            <span class="metric__note" id="readTime">—</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="online__controls">
+        <div class="chips" role="tablist" aria-label="Сервер">
+          <button class="chip is-active" type="button" role="tab" aria-selected="true" data-server="main">MAIN</button>
+          <button class="chip" type="button" role="tab" aria-selected="false" data-server="combat">COMBAT</button>
+        </div>
+
+        <div class="ranges" role="group" aria-label="Период">
+          <button class="range" type="button" data-range="30d">30д</button>
+          <button class="range" type="button" data-range="14d">14д</button>
+          <button class="range" type="button" data-range="7d">7д</button>
+          <button class="range" type="button" data-range="3d">3д</button>
+          <button class="range is-active" type="button" data-range="24h">24ч</button>
+          <button class="range" type="button" data-range="12h">12ч</button>
+          <button class="range" type="button" data-range="6h">6ч</button>
+        </div>
+      </div>
+
+      <div class="chart" id="chart">
+        <div class="chart__grid" id="chartGrid" aria-hidden="true"></div>
+        <svg class="chart__svg" id="chartSvg" viewBox="0 0 1000 300" preserveAspectRatio="none" aria-hidden="true">
+          <defs>
+            <linearGradient id="wgrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#6f66ff" stop-opacity=".45"></stop>
+              <stop offset="1" stop-color="#6f66ff" stop-opacity="0"></stop>
+            </linearGradient>
+          </defs>
+          <path id="chartArea" d="" fill="url(#wgrad)"></path>
+          <path id="chartLine" d="" fill="none" stroke="#6f66ff" stroke-width="2.5" stroke-linejoin="round" vector-effect="non-scaling-stroke"></path>
+        </svg>
+        <div class="chart__cross" id="chartCross" aria-hidden="true"></div>
+        <div class="chart__dot" id="chartDot" aria-hidden="true"></div>
+        <div class="chart__overlay" id="chartOverlay" tabindex="0" role="group" aria-describedby="chartNote" aria-label="График онлайна. Наведите курсор или используйте стрелки влево и вправо, Home и End."></div>
+        <div class="chart__empty" id="chartEmpty" hidden>
+          <span class="chart__empty-label">Сбор данных</span>
+          <strong>Собираем<br><span class="accent">данные</span></strong>
+          <p>Онлайн записывается каждые 5 минут. График появится чуть позже.</p>
+        </div>
+      </div>
+
+      <div class="chart__ticks" id="chartTicks" aria-hidden="true"></div>
+      <p class="chart__note" id="chartNote">Онлайн записывается каждые 5 минут. Время — МСК.</p>
+    </div>
+  </section>
+
+  <section class="section features" id="features" aria-labelledby="featuresTitle">
+    <h2 class="section-title" id="featuresTitle"><span class="line-mask"><span>Почему WOOH</span></span></h2>
+
+    <div class="stack">
+      <article class="feature-card feature-card--light" data-stack style="--top:24px">
+        <div class="feature-card__left">
+          <span class="feature-card__index">01</span>
+          <h3>Свой<br>лаунчер</h3>
+        </div>
+        <div class="feature-card__right">
+          <p>Лаунчер скачивается с нашего сайта, а не через Steam. Если возникнут проблемы с запуском — поможем в Telegram.</p>
+          <span class="feature-card__note">WoohLauncherSetup.exe</span>
+        </div>
+      </article>
+
+      <article class="feature-card feature-card--deep" data-stack style="--top:48px">
+        <div class="feature-card__left">
+          <span class="feature-card__index">02</span>
+          <h3>Без<br>читеров</h3>
+        </div>
+        <div class="feature-card__right">
+          <p>Работает античит, а администраторы дополнительно проводят проверки через Discord. Бан античитом — 30 дней. Читы, найденные на проверке, — бан навсегда.</p>
+          <span class="feature-card__note">Проверки только через Discord</span>
+        </div>
+      </article>
+
+      <article class="feature-card feature-card--accent" data-stack style="--top:72px">
+        <div class="feature-card__left">
+          <span class="feature-card__index">03</span>
+          <h3>Честный<br>донат</h3>
+        </div>
+        <div class="feature-card__right">
+          <p>Покупки в магазине не дают преимущества в бою. Можно играть полностью бесплатно и на равных с теми, кто поддержал проект.</p>
+          <span class="feature-card__note">woohrust.gamestores.app</span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="section updates" id="updates" aria-labelledby="updatesTitle">
+    <div class="section-head">
+      <h2 class="section-title" id="updatesTitle"><span class="line-mask"><span>Что <span class="accent">нового</span></span></span></h2>
+      <p data-reveal>Мы часто обновляем проект. Вот что уже есть в игре.</p>
+    </div>
+
+    <div class="updates__list">
+      <article class="update-row" data-reveal>
+        <div class="update-row__media">
+          <img src="assets/img/updates/buildings.png" alt="9 видов построек" width="1069" height="411" loading="lazy" decoding="async">
+        </div>
+        <div class="update-row__text">
+          <span class="update-row__num">01</span>
+          <h3>DLC на 9 разных видов построек</h3>
+          <p>Контейнеры, кирпич, бетон, дерево и другие скины стен — доступны всем игрокам.</p>
+        </div>
+      </article>
+
+      <article class="update-row" data-reveal>
+        <div class="update-row__media">
+          <img src="assets/img/updates/chat-emoji.png" alt="Эмодзи в чате" width="1140" height="417" loading="lazy" decoding="async">
+        </div>
+        <div class="update-row__text">
+          <span class="update-row__num">02</span>
+          <h3>Эмодзи в чате</h3>
+          <p>Пиши в чат с эмодзи, как в оригинальном Rust.</p>
+        </div>
+      </article>
+
+      <article class="update-row" data-reveal>
+        <div class="update-row__media update-row__media--portrait">
+          <img src="assets/img/updates/backpack.png" alt="Рюкзак" width="650" height="851" loading="lazy" decoding="async">
+        </div>
+        <div class="update-row__text">
+          <span class="update-row__num">03</span>
+          <h3>Настоящие рюкзаки из оригинального Раста</h3>
+          <p>Рюкзак надевается на персонажа и даёт дополнительные слоты.</p>
+        </div>
+      </article>
+    </div>
+
+    <div class="updates__mini">
+      <div class="mini-card" data-reveal>
+        <span class="update-row__num">04</span>
+        <h3>Бустер FPS</h3>
+        <p>Отдельная настройка в игре, которая поднимает FPS на слабом железе.</p>
+      </div>
+      <div class="mini-card" data-reveal data-delay="100">
+        <span class="update-row__num">05</span>
+        <h3>Хорошие плагины</h3>
+        <p>Удобные плагины, которые делают игру комфортнее и не ломают баланс.</p>
+      </div>
+    </div>
+
+    <div class="updates__banner" data-reveal>
+      <span>И куча всего другого</span>
+      <span>Часто обновляем проект</span>
+    </div>
+  </section>
+
+  <section class="section reviews" id="reviews" aria-labelledby="reviewsTitle">
+    <div class="section-head">
+      <h2 class="section-title" id="reviewsTitle"><span class="line-mask"><span>Говорят <span class="accent">игроки</span></span></span></h2>
+    </div>
+
+    <div class="reviews__grid">
+      <figure class="review review--dark" data-reveal>
+        <span class="review__num">01</span>
+        <blockquote>Проект очень развивающийся, каждую неделю админы стараются, готовят обновление, качественные, делают опросы среди игроков что бы проект был годным, продвигают ближе к области раста добавляю все больше и больше механик как у раста, все время в онлайне отвечая на все вопросы которые задают. На проекте так же мало людей бегающих с софтами, тк модераторы тут очень отзывчивые к игрокам ВухРаста, в общем проект прекрасный и развивающийся</blockquote>
+        <figcaption>
+          <span class="review__nick">deko</span>
+          <a href="https://steamcommunity.com/profiles/76561198727956065" target="_blank" rel="noreferrer">Steam ↗</a>
+        </figcaption>
+      </figure>
+
+      <figure class="review review--deep" data-reveal data-delay="120">
+        <span class="review__num">02</span>
+        <blockquote>Проект хороший, тянет даже на очень слабом ПК. Есть свои недочёты, но они не такие важные. Сам проект на новой отдачи, что круто. Оптимизирован очень круто, сервер не лагает. Комьюнити и админы отличные, помогают во всём, чем только можно и нельзя. Если вы выбираете WoohRust, то не ошибётесь с выбором, всем советую.</blockquote>
+        <figcaption>
+          <span class="review__nick">avangard</span>
+          <a href="https://steamcommunity.com/profiles/76561199878563275" target="_blank" rel="noreferrer">Steam ↗</a>
+        </figcaption>
+      </figure>
+
+      <figure class="review review--light" data-reveal data-delay="240">
+        <span class="review__num">03</span>
+        <blockquote>Лучший проэкт который делает годные обновления, имбейшая оптимизация которая даже на моем старом ноуте бабушки потянула в 100фпс обновления где нету ни у одного других девблогов на 266. Добрые модеры отвечают сразу же на каждую жалобу и неполадок. Проста любимке❤️</blockquote>
+        <figcaption>
+          <span class="review__nick">popstar</span>
+          <a href="https://steamcommunity.com/profiles/76561199860904151" target="_blank" rel="noreferrer">Steam ↗</a>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="download" id="download" aria-labelledby="downloadTitle">
+    <div class="download__top">
+      <div class="download__left">
+        <h2 id="downloadTitle">
+          <span class="line-mask"><span>Скачать</span></span>
+          <span class="line-mask"><span data-delay="80" class="blue">лаунчер</span></span>
+        </h2>
+        <p class="download__lead" data-reveal>Скачай лаунчер, установи и заходи на сервер.</p>
+        <p class="download__help" data-reveal data-delay="100">Не запускается? Пиши в <a href="https://t.me/woohrusthelp" target="_blank" rel="noreferrer">@woohrusthelp</a>.</p>
+
+        <div class="download__counter" id="downloadCounter" data-reveal>
+          <span class="download__counter-num" id="downloadsNum">152</span>
+          <span class="download__counter-label">скачиваний<br>лаунчера</span>
+        </div>
+      </div>
+
+      <div class="download__right" data-reveal data-delay="100">
+        <a class="download-tile" href="https://huggingface.co/datasets/123123dzc/upd-url-dataset/resolve/main/launcher/WoohLauncherSetup.exe" data-download>
+          <span class="download-tile__top">
+            <span>Windows · установщик</span>
+            <span class="download-tile__arrow" aria-hidden="true">↓</span>
+          </span>
+          <span class="download-tile__bottom">
+            <span class="download-tile__title">Скачать лаунчер</span>
+            <span class="download-tile__file">WoohLauncherSetup.exe</span>
+          </span>
+        </a>
+      </div>
+    </div>
+
+    <div class="steps">
+      <div class="step" data-reveal><span class="step__num">1</span><span class="step__title">Скачать</span><span>Установщик WoohLauncherSetup.exe — по кнопке выше.</span></div>
+      <div class="step" data-reveal data-delay="100"><span class="step__num">2</span><span class="step__title">Установить</span><span>Запусти установщик и следуй шагам.</span></div>
+      <div class="step" data-reveal data-delay="200"><span class="step__num">3</span><span class="step__title">Запустить</span><span>Открой лаунчер и заходи на сервер.</span></div>
+      <div class="step" data-reveal data-delay="300"><span class="step__num">4</span><span class="step__title">Помощь</span><span>Вопросы — в бот помощи @woohrusthelp в Telegram.</span></div>
+    </div>
+
+    <div class="requirements" data-reveal>
+      <div class="requirements__head">
+        <span class="requirements__os">Windows 10 · 64-bit · SSD</span>
+        <h3>Мин. системные требования игры <span class="accent">WoohRust</span></h3>
+      </div>
+      <dl>
+        <div><dt>OC</dt><dd>Windows 10 (64-bit).</dd></div>
+        <div><dt>Процессор</dt><dd>Intel Core i5-2300 / AMD FX-6300.</dd></div>
+        <div><dt>Оперативная память</dt><dd>8–12 GB RAM.</dd></div>
+        <div><dt>Видеокарта</dt><dd>NVIDIA GeForce 8800 Series / ATI 3800 Series.</dd></div>
+        <div><dt>Место на диске</dt><dd>19–20 GB свободного пространства. (SSD диск)</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="rules" id="rules" aria-labelledby="rulesTitle">
+    <div class="rules__panel">
+      <div class="section-head section-head--tight">
+        <h2 class="section-title" id="rulesTitle">Правила</h2>
+        <p>Входя на сервер, вы автоматически принимаете правила. Незнание правил не освобождает от наказания.</p>
+      </div>
+
+      <div class="chips rules__tabs" role="tablist" aria-label="Разделы правил" id="ruleTabs">
+        <button class="chip" type="button" role="tab" id="rules-tab-0" aria-controls="rules-panel-0" aria-selected="false" tabindex="-1">Основное</button>
+        <button class="chip" type="button" role="tab" id="rules-tab-1" aria-controls="rules-panel-1" aria-selected="false" tabindex="-1">Чат</button>
+        <button class="chip is-active" type="button" role="tab" id="rules-tab-2" aria-controls="rules-panel-2" aria-selected="true">Игровой процесс</button>
+        <button class="chip" type="button" role="tab" id="rules-tab-3" aria-controls="rules-panel-3" aria-selected="false" tabindex="-1">Проверки</button>
+      </div>
+
+      <div class="rules__panels" id="rulesPanels">
+        <ul class="rules__list" id="rules-panel-0" role="tabpanel" aria-labelledby="rules-tab-0" hidden>
+          <li class="rule"><span>Играя на сервере, вы принимаете правила.</span></li>
+          <li class="rule"><span>Правила могут изменяться без предварительного уведомления.</span></li>
+          <li class="rule"><span>Модератор выбирает наказание в зависимости от нарушения.</span></li>
+          <li class="rule"><span>Вы несёте ответственность за все свои аккаунты.</span></li>
+        </ul>
+
+        <ul class="rules__list" id="rules-panel-1" role="tabpanel" aria-labelledby="rules-tab-1" hidden>
+          <li class="rule"><span>Запрещено предлагать действия, которые выкинут игрока с сервера.</span></li>
+          <li class="rule"><span>Запрещена клевета на администрацию и сервер.</span></li>
+          <li class="rule"><span>Запрещено выдавать себя за администратора или модератора.</span></li>
+          <li class="rule"><span>Запрещён флуд и реклама сторонних проектов.</span></li>
+          <li class="rule"><span>Обсуждение политики в чате запрещено.</span></li>
+        </ul>
+
+        <ul class="rules__list" id="rules-panel-2" role="tabpanel" aria-labelledby="rules-tab-2">
+          <li class="rule rule--penalty"><span>Бан античитом</span><span class="rule__penalty">бан 30 дней</span></li>
+          <li class="rule rule--penalty"><span>Читы, найденные на проверке</span><span class="rule__penalty">бан навсегда</span></li>
+          <li class="rule rule--penalty"><span>Использование багов</span><span class="rule__penalty">бан навсегда</span></li>
+          <li class="rule rule--penalty"><span>Тим+</span><span class="rule__penalty">бан 7 дней</span></li>
+          <li class="rule"><span>Соблюдайте лимит команды, указанный в названии</span></li>
+          <li class="rule"><span>Запрещено строиться в камнях и текстурах</span></li>
+          <li class="rule"><span>Повышение яркости монитора разрешено</span></li>
+        </ul>
+
+        <ul class="rules__list" id="rules-panel-3" role="tabpanel" aria-labelledby="rules-tab-3" hidden>
+          <li class="rule"><span>Проверки проходят только через Discord</span></li>
+          <li class="rule rule--penalty"><span>Выход с проверки</span><span class="rule__penalty">бан 30 дней</span></li>
+          <li class="rule rule--penalty"><span>Игнорирование проверки</span><span class="rule__penalty">бан 30 дней</span></li>
+          <li class="rule rule--penalty"><span>Отказ от проверки</span><span class="rule__penalty">бан 30 дней</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <footer class="final">
+    <button class="final__copy" type="button" data-copy="client.connect 5.42.211.95:35000">
+      <span class="final__label copy-label">Нажми, чтобы скопировать команду</span>
+      <span class="final__command">client.connect<br>5.42.211.95:35000</span>
+    </button>
+
+    <div class="final__socials">
+      <a href="https://t.me/woohrust" target="_blank" rel="noreferrer">Telegram ↗</a>
+      <a href="https://t.me/woohrusthelp" target="_blank" rel="noreferrer">Бот помощи ↗</a>
+      <a href="https://woohrust.gamestores.app" target="_blank" rel="noreferrer">Магазин ↗</a>
+    </div>
+
+    <div class="final__meta">
+      <span>© 2026 WOOHRUST</span>
+      <span class="final__visitors" id="visitors" hidden><b id="visitorsNum">0</b>&nbsp; <span id="visitorsWord">человек были</span> на сайте за сутки</span>
+      <span class="final__legal"><a href="privacy/index.html">Конфиденциальность</a><a href="terms/index.html">Соглашение</a></span>
+    </div>
+  </footer>
+
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <div class="mobile-menu__head">
+      <a class="brand" href="#top" aria-label="WOOH — на главную">
+        <img src="assets/img/logo.png" alt="" width="30" height="30">
+        <span>WOOH</span>
+      </a>
+      <button class="btn btn--outline btn--sm" type="button" id="menuClose">Закрыть</button>
+    </div>
+
+    <nav class="mobile-menu__nav" aria-label="Мобильная навигация">
+      <a href="#servers"><span>Серверы</span><span class="mobile-menu__arrow">→</span></a>
+      <a href="#online"><span>Онлайн</span><span class="mobile-menu__arrow">→</span></a>
+      <a href="#features"><span>Фичи</span><span class="mobile-menu__arrow">→</span></a>
+      <a href="#download"><span>Скачать</span><span class="mobile-menu__arrow">→</span></a>
+      <a href="#rules"><span>Правила</span><span class="mobile-menu__arrow">→</span></a>
+      <a href="https://woohrust.gamestores.app" target="_blank" rel="noreferrer"><span>Магазин</span><span class="mobile-menu__arrow">↗</span></a>
+    </nav>
+
+    <a class="btn btn--light btn--lg mobile-menu__cta" href="#download">Скачать лаунчер</a>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <noscript>
+    <style>.curtain{display:none!important}.rules__tabs{display:none!important}#rulesPanels [role="tabpanel"][hidden]{display:block!important}</style>
+  </noscript>
+</body>
+</html>

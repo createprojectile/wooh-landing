@@ -1,0 +1,50 @@
+/* ============================================================
+   Reviews — player quotes
+   ============================================================ */
+
+.reviews { padding-top: clamp(60px, 10vh, 120px); padding-bottom: var(--section-y); }
+
+.reviews__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+  gap: 12px;
+  align-items: stretch;
+  margin-top: clamp(36px, 6vh, 64px);
+}
+
+.review {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  padding: clamp(24px, 3vw, 36px);
+  border-radius: 28px;
+  border: 1px solid transparent;
+}
+.review--dark { background: var(--card); color: var(--fg); border-color: var(--line); }
+.review--deep { background: var(--bg-deep); color: var(--fg); border-color: var(--line-strong); }
+.review--light { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+
+.review__num {
+  font-family: 'Unbounded', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+}
+.review blockquote {
+  font-size: clamp(16px, 1.3vw, 18px);
+  line-height: 1.55;
+  font-weight: 500;
+  text-wrap: pretty;
+}
+.review figcaption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: auto;
+  padding-top: 18px;
+  border-top: 1px solid var(--line-strong);
+  font-size: 14px;
+}
+.review--light figcaption { border-color: #c9c6d8; }
+.review__nick { font-weight: 600; }
+.review figcaption a { opacity: .7; }

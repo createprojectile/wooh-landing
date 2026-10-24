@@ -1,0 +1,50 @@
+/* ============================================================
+   Rules — tabs and rule cards
+   ============================================================ */
+
+.rules {
+  padding: 0 var(--pad) var(--section-y);
+  background: var(--fg);
+  color: var(--bg);
+}
+.rules__panel {
+  padding: clamp(28px, 4vw, 56px);
+  border-radius: var(--radius);
+  background: var(--bg);
+  color: var(--fg);
+}
+.section-head--tight { margin-bottom: 0; }
+.section-head--tight > p {
+  max-width: 440px;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.rules__tabs { margin: 40px 0 28px; }
+
+.rules__list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+  gap: 10px;
+}
+.rule {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 22px 24px;
+  border-radius: 20px;
+  background: var(--card-2);
+  color: var(--fg);
+  font-size: 16px;
+  line-height: 1.45;
+  font-weight: 500;
+}
+.rule--penalty { background: var(--accent); color: var(--bg); }
+.rule__penalty {
+  font-family: 'Unbounded', sans-serif;
+  font-weight: 700;
+  font-size: 22px;
+  letter-spacing: -.02em;
+}

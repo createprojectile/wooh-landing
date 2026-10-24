@@ -1,0 +1,166 @@
+/* ============================================================
+   Components — reusable UI: curtain, buttons, brand, chips,
+   mobile menu, toast, reveal primitives.
+   ============================================================ */
+
+/* ---------- Page curtain ---------- */
+.curtain {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  pointer-events: none;
+}
+.curtain__dark,
+.curtain__accent {
+  position: absolute;
+  inset: 0;
+  transition: transform .56s var(--curtain);
+  will-change: transform;
+}
+.curtain__dark { background: var(--bg); }
+.curtain__accent { background: var(--accent); transition-delay: .09s; }
+.curtain.is-done .curtain__dark,
+.curtain.is-done .curtain__accent { transform: translateY(-100%); }
+.curtain.is-hidden { visibility: hidden; }
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 44px;
+  padding: 0 18px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  transition: background .25s, color .25s, transform .35s var(--spring), opacity .2s;
+}
+.btn--light { background: var(--fg); color: var(--bg); }
+.btn--outline { border: 1.5px solid var(--fg); color: var(--fg); background: transparent; }
+.btn--sm { height: 44px; padding: 0 18px; font-size: 14px; }
+.btn--lg { height: 60px; padding: 0 30px; font-size: 17px; }
+.btn--outline.btn--lg { padding: 0 26px; font-size: 15px; border-width: 2px; }
+.btn--light:hover { transform: scale(1.04); opacity: 1; }
+.btn--spring:hover { transform: scale(1.06) rotate(-2deg); opacity: 1; color: var(--bg); }
+.btn--outline:hover { background: var(--fg); color: var(--bg); opacity: 1; }
+.btn:active { transform: scale(.98); }
+
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Unbounded', sans-serif;
+  font-weight: 900;
+  font-size: 20px;
+  letter-spacing: -.02em;
+  line-height: 1;
+}
+.brand img { width: 30px; height: 30px; object-fit: contain; }
+
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.chip {
+  height: 40px;
+  padding: 0 18px;
+  border-radius: 999px;
+  border: 1.5px solid var(--line-strong);
+  background: transparent;
+  color: var(--fg);
+  font-size: 14px;
+  font-weight: 600;
+  transition: background .25s, color .25s, border-color .25s;
+}
+.chip:hover { border-color: var(--fg); }
+.chip.is-active { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+
+
+/* ---------- Mobile menu ---------- */
+.mobile-menu {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  padding: 24px 16px;
+  overflow-y: auto;
+  background: linear-gradient(180deg, #000 0%, var(--bg-deep) 100%);
+  color: var(--fg);
+  visibility: hidden;
+  transform: translateY(-100%);
+  /* Visible during the close slide, hidden afterwards. */
+  transition: transform .5s var(--ease), visibility 0s .5s;
+}
+.mobile-menu.is-open {
+  visibility: visible;
+  transform: none;
+  transition: transform .5s var(--ease), visibility 0s;
+}
+
+.mobile-menu__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.mobile-menu__nav {
+  display: flex;
+  flex-direction: column;
+  margin-top: 40px;
+}
+.mobile-menu__nav a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line-strong);
+  font-family: 'Unbounded', sans-serif;
+  font-weight: 900;
+  text-transform: uppercase;
+  font-size: clamp(28px, 9vw, 44px);
+  line-height: 1;
+  letter-spacing: -.04em;
+}
+.mobile-menu__arrow { font-size: 20px; color: var(--accent); }
+.mobile-menu__cta { margin-top: 32px; flex: none; }
+
+/* ---------- Toast ---------- */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  z-index: 10002;
+  padding: 12px 20px;
+  border-radius: 999px;
+  background: var(--fg);
+  color: var(--bg);
+  font-size: 14px;
+  font-weight: 600;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, 12px);
+  transition: opacity .25s, transform .25s;
+}
+.toast.is-visible { opacity: 1; transform: translate(-50%, 0); }
+
+/* ---------- Reveal ---------- */
+.js .line-mask > span {
+  transform: translateY(110%);
+  transition: transform 1.1s var(--ease);
+  transition-delay: var(--delay, 0ms);
+}
+.js .line-mask.is-in > span { transform: translateY(0); }
+
+.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 1.1s var(--ease), transform 1.1s var(--ease);
+  transition-delay: var(--delay, 0ms);
+}
+.js [data-reveal].is-in { opacity: 1; transform: none; }
